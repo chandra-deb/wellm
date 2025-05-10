@@ -1,0 +1,8 @@
+// src/pages/chatSession/chatSession.scss
+.chat-session-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; // Or 100% if it's within a layout that already has 100vh
+  width: 100%;
+  box-sizing: border-box;
+}
