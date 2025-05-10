@@ -1,0 +1,72 @@
+// src/layout/MainLayout/MainLayout.scss
+@import '../../styles/variables';
+
+.main-layout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; // Crucial to prevent scrollbars when content slides
+  position: relative; // Context for positioning children
+  background-color: $background-sidebar; // Background visible when content slides
+}
+
+.sidebar-container { // Holds the sidebar
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100vh;
+  z-index: $z-index-sidebar; // Sidebar is behind the pusher
+  // The Sidebar.scss will handle its own padding-top for the topbar area
+}
+
+.main-content-pusher {
+  position: relative; // Will be translated
+  width: 100%;
+  height: 100%;
+  background-color: $background-main-content; // Or your chat area background
+  z-index: $z-index-content-pusher; // Above the sidebar
+  transition: transform $transition-speed $transition-timing;
+  display: flex;
+  flex-direction: column; // So Topbar and content-wrapper stack vertically
+
+  &--sidebar-open {
+    transform: translateX($sidebar-width);
+    box-shadow: -3px 0px 15px rgba(0,0,0,0.2); // Optional: subtle shadow
+  }
+}
+
+// Topbar is a direct child of .main-content-pusher in JSX/TSX.
+// Its styles in Topbar.scss should make it position: relative or static.
+
+.content-wrapper {
+  flex-grow: 1;
+  // The Topbar's own height will push this down as it's part of the flex flow.
+  overflow-y: auto;
+  // height: calc(100% - #{$topbar-height}); // Only if Topbar is outside and fixed, not needed here
+  box-sizing: border-box;
+}
+
+// Overlay is optional for this push menu pattern.
+// If used, it could cover the main content area when sidebar is open to capture clicks.
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0; // Start at the very left
+  width: 100%;
+  height: 100%;
+  background-color: $background-overlay;
+  z-index: $z-index-overlay; // Should be lower than sidebar and pusher
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-speed $transition-timing, visibility $transition-speed $transition-timing, left 0s $transition-speed; // Delay left transition until not visible
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    left: $sidebar-width; // IMPORTANT: Shift overlay to only cover the main content area
+    // The width effectively becomes calc(100% - $sidebar-width) due to the left offset,
+    // or you could explicitly set width: calc(100vw - $sidebar-width); if needed,
+    // but for a simple click catcher, left offset on a 100% width element is fine.
+    transition: opacity $transition-speed $transition-timing, visibility $transition-speed $transition-timing, left 0s 0s; // Apply left immediately
+  }
+}

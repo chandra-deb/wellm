@@ -1,0 +1,31 @@
+// src/components/Topbar/Topbar.scss
+@import '../../styles/variables';
+
+.topbar {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  height: $topbar-height;
+  background-color: $background-topbar;
+  border-bottom: 1px solid $border-color-topbar; // Use variable if defined
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0; // Prevent Topbar from shrinking if content-wrapper is too large
+}
+
+.topbar-toggle-button {
+  background-color: transparent;
+  color: #333; // Darker color for better visibility on light background
+  border: none;
+  padding: 8px 12px;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-right: 15px; // Space between button and title
+  display: block; // Visible on mobile by default
+}
+
+.topbar-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}

@@ -1,0 +1,22 @@
+// src/styles/_variables.scss
+$topbar-height: 60px;
+$sidebar-width: 260px; // Matches your Sidebar.scss width
+
+$transition-speed: 0.3s;
+$transition-timing: ease-in-out;
+
+// Z-indexes
+$z-index-sidebar: 1000;
+$z-index-content-pusher: 1010; // The main content area that slides
+// Overlay might not be needed for a push menu, but good to have
+$z-index-overlay: 1005;
+
+// Colors - pulling from your existing files or providing defaults
+$background-sidebar: #f0f2f5; // From your Sidebar.scss
+$text-color-sidebar: #333;    // From your Sidebar.scss
+
+$background-topbar: #f8f9fa;    // From your Topbar.scss
+$border-color-topbar: #dee2e6; // From your Topbar.scss
+
+$background-main-content: #ffffff; // Default white for chat area background
+$background-overlay: rgba(0, 0, 0, 0.4); // Default for overlay
